@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>선택자 | css</title>
+        <link
+            rel="stylesheet"
+            href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+        />
+        />
     </head>
     <body>
         <h1>css</h1>
@@ -53,13 +58,25 @@
 
         <!-- 인접 형제 선택기 (+) -->
         <input type="checkbox" id="term1" name="term1" checked />
-        <label for="term1">이용약관</label>
+        <label for="term1" class="label">이용약관</label>
         <br />
         <input type="checkbox" id="term2" name="term2" />
-        <label for="term2">개인정보처리방침</label>
+        <label for="term2" class="label">개인정보처리방침</label>
         <style>
-            input:checked + label {
+            input:checked + .label {
                 color: red;
+            }
+            input:checked + .label::before {
+                background: blue;
+            }
+        </style>
+        <style>
+            .label::before {
+                content: '';
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                border: 1px solid red;
             }
         </style>
         <hr />
@@ -81,12 +98,21 @@
         <hr />
         <!-- 가상 클래스 -->
         <ul class="nav1">
-            <li>menu1 <span>|</span></li>
-            <li>menu2 <span>|</span></li>
-            <li>menu3 <span>|</span></li>
-            <li>menu4 <span>|</span></li>
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
         </ul>
         <style>
+            .nav1 li:last-child::after {
+                display: none;
+            }
+
+            .nav1 li::after {
+                content: '|';
+                margin: 0 10px;
+            }
+
             .nav1 {
                 display: flex;
                 list-style: none;
@@ -116,6 +142,65 @@
             }
             .inp:focus::placeholder {
                 color: #fff;
+            }
+        </style>
+
+        <!-- 가상선택자 ::before, ::after -->
+        <ul class="list2">
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
+        </ul>
+        <style>
+            .list2::before {
+                content: 'ul 앞에 내용';
+            }
+            .list2::after {
+                content: 'ul 뒤에 내용';
+            }
+            .list2 li::before {
+                content: '';
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                margin-right: 10px;
+                background: purple;
+            }
+            .list2 li::after {
+                content: 'li 뒤에 내용';
+                font-family: 'Line Awesome Free';
+                font-weight: 900;
+                content: '\f1b0';
+            }
+        </style>
+        <ul class="list3">
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+        </ul>
+        <style>
+            .list3 {
+                list-style: none;
+            }
+            .list3 li::before {
+                content: '\f105';
+                font-family: 'Line Awesome Free';
+                font-weight: 900;
+            }
+        </style>
+
+        <!-- 속성선택자 [] -->
+        <a href="#">네이버</a>
+        <a href="#" target="_blank">네이버</a>
+        <a href="#" target="_top">네이버</a>
+
+        <style>
+            a[target] {
+                color: red;
+            }
+            a[target='_blank'] {
+                color: green;
             }
         </style>
     </body>
